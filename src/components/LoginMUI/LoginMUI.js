@@ -23,7 +23,13 @@ const defaultProps = {
       type: "text",
       name: "username",
       placeholder: "Username",
-      validation: yup.string().required()
+      required: false
+    },
+    password: {
+      type: "password",
+      name: "password",
+      placeholder: "Password",
+      required: false
     }
   }
 };
@@ -32,6 +38,9 @@ const defaultProps = {
  * Displays the component
  */
 const LoginMUI = props => {
+  const { fields } = props;
+  const { username, password } = fields;
+
   /**
    * This can be generated from props
    */
@@ -53,11 +62,15 @@ const LoginMUI = props => {
 
       <form onSubmit={handleSubmit(formHandler)}>
         <TextField
-          label="Username"
+          label={errors.username ? "Error" : "Username"}
           name="username"
           variant="outlined"
           margin="normal"
           fullWidth
+          required={username.required}
+          error={errors.username}
+          helperText={errors?.username?.message ?? ""}
+          inputRef={register}
         />
         <TextField
           label="Password"
@@ -65,12 +78,21 @@ const LoginMUI = props => {
           variant="outlined"
           margin="normal"
           fullWidth
+          required={password.required}
+          inputRef={register}
         />
         <FormControlLabel
           control={<Checkbox value="remember" />}
           label="Remember me"
+          inputRef={register}
         />
-        <Button type="submit" fullWidth variant="contained" color="primary">
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          inputRef={register}
+        >
           Sign In
         </Button>
       </form>
