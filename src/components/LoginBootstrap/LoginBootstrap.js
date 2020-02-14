@@ -6,10 +6,14 @@ import * as yup from "yup";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Button from "@material-ui/core/Button";
+import {
+  FormGroup,
+  FormLabel,
+  FormControl,
+  FormText,
+  FormCheck,
+  Button
+} from "react-bootstrap";
 
 /**
  * Defines the prop types
@@ -63,39 +67,19 @@ const LoginBootstrap = props => {
       <h3>LoginBootstrap</h3>
 
       <form onSubmit={handleSubmit(formHandler)}>
-        <TextField
-          label={errors.username ? "Error" : "Username"}
-          name="username"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          required={username.required}
-          error={errors.username}
-          helperText={errors?.username?.message ?? ""}
-          inputRef={register}
-        />
-        <TextField
-          label="Password"
-          name="password"
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          required={password.required}
-          inputRef={register}
-        />
-        <FormControlLabel
-          control={<Checkbox value="remember" />}
-          label="Remember me"
-          inputRef={register}
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          inputRef={register}
-        >
-          Sign In
+        <FormGroup controlId="username">
+          <FormLabel>Username</FormLabel>
+          <FormControl type="text" placeholder="Username" />
+        </FormGroup>
+        <FormGroup controlId="password">
+          <FormLabel>Password</FormLabel>
+          <FormControl type="password" placeholder="Password" />
+        </FormGroup>
+        <FormGroup controlId="remember">
+          <FormCheck type="checkbox" label="Remember me" />
+        </FormGroup>
+        <Button variant="primary" type="submit">
+          Submit
         </Button>
       </form>
     </div>
