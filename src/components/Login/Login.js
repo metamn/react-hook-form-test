@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { useForm } from "react-hook-form";
+import * as yup from "yup";
 import styled from "styled-components";
 
 /**
@@ -12,7 +13,16 @@ const propTypes = {};
 /**
  * Defines the default props
  */
-const defaultProps = {};
+const defaultProps = {
+  fields: {
+    username: {
+      type: "text",
+      name: "username",
+      placeholder: "Username",
+      validation: yup.string().required()
+    }
+  }
+};
 
 const Input = styled("div")(() => ({
   marginBottom: "1em",
@@ -25,7 +35,18 @@ const Input = styled("div")(() => ({
  * Displays the component
  */
 const Login = props => {
-  const { register, handleSubmit, errors } = useForm();
+  /**
+   * This can be generated from props
+   */
+  const validationSchema = yup.object().shape({
+    username: yup.string().required(),
+    password: yup.string().required()
+  });
+
+  const { register, handleSubmit, errors } = useForm({
+    validationSchema: validationSchema
+  });
+
   const onSubmit = data => console.log(data);
   console.log(errors);
 
@@ -42,6 +63,11 @@ const Login = props => {
             name="username"
             ref={register}
           />
+          {errors.username && (
+            <ul className="Messages">
+              <li>{errors.username.message}</li>
+            </ul>
+          )}
         </Input>
         <Input className="Input">
           <label className="Label">Password</label>
@@ -51,6 +77,11 @@ const Login = props => {
             name="password"
             ref={register}
           />
+          {errors.password && (
+            <ul className="Messages">
+              <li>{errors.password.message}</li>
+            </ul>
+          )}
         </Input>
         <Input className="Input">
           <label>Remember me</label>
