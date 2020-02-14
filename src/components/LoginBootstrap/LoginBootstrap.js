@@ -4,16 +4,8 @@ import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
+import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import {
-  FormGroup,
-  FormLabel,
-  FormControl,
-  FormText,
-  FormCheck,
-  Button
-} from "react-bootstrap";
 
 /**
  * Defines the prop types
@@ -66,22 +58,49 @@ const LoginBootstrap = props => {
     <div className="LoginBootstrap">
       <h3>LoginBootstrap</h3>
 
-      <form onSubmit={handleSubmit(formHandler)}>
-        <FormGroup controlId="username">
-          <FormLabel>Username</FormLabel>
-          <FormControl type="text" placeholder="Username" />
-        </FormGroup>
-        <FormGroup controlId="password">
-          <FormLabel>Password</FormLabel>
-          <FormControl type="password" placeholder="Password" />
-        </FormGroup>
-        <FormGroup controlId="remember">
-          <FormCheck type="checkbox" label="Remember me" />
-        </FormGroup>
-        <Button variant="primary" type="submit">
+      <Form onSubmit={handleSubmit(formHandler)}>
+        <Form.Group controlId="username">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="text"
+            name="username"
+            placeholder="Username"
+            className={errors.username ? "is-invalid" : "valid"}
+            ref={register({ required: username.required })}
+          />
+          {errors.username && (
+            <Form.Control.Feedback type="invalid">
+              {errors.username.message}
+            </Form.Control.Feedback>
+          )}
+        </Form.Group>
+        <Form.Group controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            name="password"
+            placeholder="Password"
+            className={errors.password ? "is-invalid" : "valid"}
+            ref={register({ required: password.required })}
+          />
+          {errors.password && (
+            <Form.Control.Feedback type="invalid">
+              {errors.password.message}
+            </Form.Control.Feedback>
+          )}
+        </Form.Group>
+        <Form.Group controlId="remember">
+          <Form.Check
+            type="checkbox"
+            name="remember"
+            label="Remember me"
+            ref={register}
+          />
+        </Form.Group>
+        <Button variant="primary" name="submit" type="submit" ref={register}>
           Submit
         </Button>
-      </form>
+      </Form>
     </div>
   );
 };
