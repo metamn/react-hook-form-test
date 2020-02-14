@@ -47,14 +47,14 @@ const Login = props => {
     validationSchema: validationSchema
   });
 
-  const onSubmit = data => console.log(data);
-  console.log(errors);
+  const formHandler = data => console.log("Data:", data);
+  console.log("Errors:", errors);
 
   return (
     <div className="Login">
       <h3>Login</h3>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(formHandler)}>
         <Input className="Input">
           <label className="Label">Username</label>
           <input
