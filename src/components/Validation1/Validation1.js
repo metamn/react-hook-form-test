@@ -21,6 +21,7 @@ const Validation1 = props => {
   yup.setLocale({
     number: "It must be a number"
   });
+
   const validationSchema = yup.object().shape({
     input: yup.number()
   });
