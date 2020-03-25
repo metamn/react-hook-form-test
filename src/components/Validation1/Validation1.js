@@ -1,0 +1,50 @@
+import React from "react";
+import PropTypes from "prop-types";
+
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+
+/**
+ * Defines the prop types
+ */
+const propTypes = {};
+
+/**
+ * Defines the default props
+ */
+const defaultProps = {};
+
+/**
+ * Displays the component
+ */
+const Validation1 = props => {
+  yup.setLocale({
+    number: "It must be a number"
+  });
+  const validationSchema = yup.object().shape({
+    input: yup.number()
+  });
+
+  const { errors, register } = useForm({
+    mode: "onChange",
+    validationSchema
+  });
+
+  console.log(errors);
+
+  return (
+    <div className="Validation1">
+      <input name="input" ref={register} />
+      <p>Errors: {JSON.stringify(errors)}</p>
+    </div>
+  );
+};
+
+Validation1.propTypes = propTypes;
+Validation1.defaultProps = defaultProps;
+
+export default Validation1;
+export {
+  propTypes as Validation1PropTypes,
+  defaultProps as Validation1DefaultProps
+};
