@@ -23,11 +23,11 @@ const Validation1 = props => {
   });
 
   const validationSchema = yup.object().shape({
-    input: yup.number()
+    input: yup.number().required()
   });
 
-  const { errors, register } = useForm({
-    mode: "onChange",
+  const { errors, register, triggerValidation } = useForm({
+    //mode: "onChange",
     validationSchema
   });
 
@@ -35,7 +35,12 @@ const Validation1 = props => {
 
   return (
     <div className="Validation1">
-      <input name="input" ref={register} />
+      <p>
+        <input name="input" ref={register} />
+      </p>
+      <p>
+        <button onClick={() => triggerValidation("input")}>Validate</button>
+      </p>
       <p>Errors: {JSON.stringify(errors)}</p>
     </div>
   );
