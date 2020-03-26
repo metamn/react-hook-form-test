@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import shortid from "shortid";
 import * as yup from "yup";
@@ -67,6 +67,10 @@ const Validation2 = props => {
   /**
    * Manages the form and the validations
    */
+  yup.setLocale({
+    number: "It must be a number"
+  });
+
   const validationSchema = yup.object().shape({
     language: yup.number()
   });
@@ -81,9 +85,12 @@ const Validation2 = props => {
   const [selected, setSelected] = useState(code);
 
   const selectHandler = event => {
-    triggerValidation("language");
     setSelected(event.target.value);
   };
+
+  useEffect(() => {
+    triggerValidation("language");
+  }, [selected]);
 
   /**
    * Prepares the items
@@ -107,7 +114,7 @@ const Validation2 = props => {
           id="LanguageSelectorSelect"
           value={selected}
           onChange={selectHandler}
-          ref={register}
+          inputRef={register}
         >
           {items}
         </TextField>
@@ -118,6 +125,7 @@ const Validation2 = props => {
       <p>
         <button onClick={() => triggerValidation("language")}>Validate</button>
       </p>
+      <p>Selected: {selected}</p>
       <p>Errors: {JSON.stringify(errors)}</p>
     </div>
   );
