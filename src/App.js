@@ -8,6 +8,7 @@ import Validation1 from "./components/Validation1";
 import Validation1a from "./components/Validation1a";
 import Validation1b from "./components/Validation1b";
 import Validation2 from "./components/Validation2";
+import Validation3 from "./components/Validation3";
 
 const App = () => {
   return (
@@ -40,8 +41,11 @@ const App = () => {
         </li>
         <li>
           <Link to="/validation2">
-            Validation2 (Select, MUI, Yup, triggerValidation)
+            Validation2 (Select, MUI, Yup, triggerValidation) - not working
           </Link>
+        </li>
+        <li>
+          <Link to="/validation3">Validation3 (Select, MUI, Yup) - works</Link>
         </li>
       </ul>
       <Switch>
@@ -65,6 +69,9 @@ const App = () => {
         </Route>
         <Route path="/validation2">
           <Validation2 />
+        </Route>
+        <Route path="/validation3">
+          <Validation3 />
         </Route>
         <Route path="/"></Route>
       </Switch>
