@@ -75,9 +75,11 @@ const Validation3 = props => {
     input: yup.number()
   });
 
+  const [errors, setErrors] = useState([]);
+
   const validateSchema = data =>
     validationSchema.validate(data).catch(function(err) {
-      console.log("Errors:", err.errors); // => ['Deve ser maior que 18']
+      setErrors(err.errors);
     });
 
   /**
@@ -108,7 +110,7 @@ const Validation3 = props => {
   return (
     <div className="Validation3">
       <p>Validation3</p>
-      <FormControl className={classes.formControl}>
+      <FormControl className={classes.formControl} error={errors.length > 0}>
         <TextField
           name="input"
           select
@@ -117,6 +119,13 @@ const Validation3 = props => {
         >
           {items}
         </TextField>
+        {errors.length > 0 && (
+          <FormHelperText>
+            {errors.map(item => (
+              <p>{item}</p>
+            ))}
+          </FormHelperText>
+        )}
       </FormControl>
       <p>
         <button onClick={() => validateSchema({ input: selected })}>
@@ -124,6 +133,7 @@ const Validation3 = props => {
         </button>
       </p>
       <p>Selected: {selected}</p>
+      <p>Errors: {JSON.stringify(errors)}</p>
     </div>
   );
 };
