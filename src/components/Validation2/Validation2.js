@@ -72,7 +72,7 @@ const Validation2 = props => {
   });
 
   const validationSchema = yup.object().shape({
-    language: yup.number()
+    input: yup.number()
   });
 
   const { errors, register, triggerValidation } = useForm({
@@ -89,7 +89,7 @@ const Validation2 = props => {
   };
 
   useEffect(() => {
-    triggerValidation("language");
+    triggerValidation("input");
   }, [selected]);
 
   /**
@@ -109,21 +109,20 @@ const Validation2 = props => {
       <p>Validation2</p>
       <FormControl className={classes.formControl} error={errors.language}>
         <TextField
-          name="language"
+          name="input"
           select
-          id="LanguageSelectorSelect"
           value={selected}
-          onChange={selectHandler}
+          //onChange={selectHandler}
           inputRef={register}
         >
           {items}
         </TextField>
-        {errors.language && errors.language.message && (
-          <FormHelperText>{errors.language.message}</FormHelperText>
+        {errors.input && errors.input.message && (
+          <FormHelperText>{errors.input.message}</FormHelperText>
         )}
       </FormControl>
       <p>
-        <button onClick={() => triggerValidation("language")}>Validate</button>
+        <button onClick={() => triggerValidation("input")}>Validate</button>
       </p>
       <p>Selected: {selected}</p>
       <p>Errors: {JSON.stringify(errors)}</p>
