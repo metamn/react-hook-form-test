@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import LoginMUI from "./components/LoginMUI";
 import LoginBootstrap from "./components/LoginBootstrap";
 import Validation1 from "./components/Validation1";
+import Validation2 from "./components/Validation2";
 
 const App = () => {
   return (
@@ -23,7 +24,12 @@ const App = () => {
           <Link to="/loginbootstrap">Login Bootstrap</Link>
         </li>
         <li>
-          <Link to="/validation1">Validation1</Link>
+          <Link to="/validation1">Validation1 (Yup, triggerValidation)</Link>
+        </li>
+        <li>
+          <Link to="/validation2">
+            Validation2 (MUI, Yup, triggerValidation)
+          </Link>
         </li>
       </ul>
       <Switch>
@@ -38,6 +44,9 @@ const App = () => {
         </Route>
         <Route path="/validation1">
           <Validation1 />
+        </Route>
+        <Route path="/validation2">
+          <Validation2 />
         </Route>
         <Route path="/"></Route>
       </Switch>

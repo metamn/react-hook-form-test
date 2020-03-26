@@ -27,11 +27,8 @@ const Validation1 = props => {
   });
 
   const { errors, register, triggerValidation } = useForm({
-    //mode: "onChange",
     validationSchema
   });
-
-  console.log(errors);
 
   return (
     <div className="Validation1">
